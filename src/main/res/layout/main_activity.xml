@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <io.github.rsookram.ten.VerticalProgressBar
+            android:id="@+id/vertical_progress"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="end" />
+
+        <GridLayout
+            android:id="@+id/digits"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="@integer/row_count"
+            android:columnCount="8"
+            android:layout_marginHorizontal="16dp"
+            android:splitMotionEvents="false" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp">
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textSize="48sp"
+            tools:text="40" />
+    </LinearLayout>
+</LinearLayout>
