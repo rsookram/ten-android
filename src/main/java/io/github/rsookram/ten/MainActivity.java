@@ -93,8 +93,14 @@ public class MainActivity extends Activity {
         digits = new int[numDigits];
         selectedDigits = new BitSet(numDigits);
 
-        setUpInitialState();
-        findViewById(R.id.reset).setOnClickListener(v -> setUpInitialState());
+        setUpInitialState(false);
+
+        View resetButton = findViewById(R.id.reset);
+        resetButton.setOnClickListener(v -> setUpInitialState(true));
+        resetButton.setOnLongClickListener(v -> {
+            setUpInitialState(false);
+            return true;
+        });
 
         grid.setOnTouchListener(gridTouchListener);
 
@@ -105,7 +111,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void setUpInitialState() {
+    private void setUpInitialState(boolean enableTimer) {
         for (int i = 0; i < grid.getChildCount(); i++) {
             int digit = nextDigit();
             digits[i] = digit;
@@ -117,11 +123,14 @@ public class MainActivity extends Activity {
         resetSelectionState();
 
         VerticalProgressBar verticalProgress = findViewById(R.id.vertical_progress);
-        verticalProgress.restart();
-        verticalProgress.setOnComplete(() -> {
-            grid.setAlpha(0.5f);
-            grid.setEnabled(false);
-        });
+        verticalProgress.reset();
+        if (enableTimer) {
+            verticalProgress.start();
+            verticalProgress.setOnComplete(() -> {
+                grid.setAlpha(0.5f);
+                grid.setEnabled(false);
+            });
+        }
 
         grid.setAlpha(1.0f);
         grid.setEnabled(true);

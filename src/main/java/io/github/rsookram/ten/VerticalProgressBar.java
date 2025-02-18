@@ -74,14 +74,20 @@ public class VerticalProgressBar extends View {
         canvas.drawRect(progressBarRect, progressBarPaint);
     }
 
-    public void restart() {
+    public void start() {
         startTime = SystemClock.uptimeMillis();
-        progressPercentage = 1.0f;
         invalidate();
 
         removeCallbacks(nextProgressStep);
 
         postOnAnimation(nextProgressStep);
+    }
+
+    public void reset() {
+        progressPercentage = 1.0f;
+        invalidate();
+
+        removeCallbacks(nextProgressStep);
     }
 
     public void setOnComplete(Runnable onComplete) {
